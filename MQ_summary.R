@@ -327,4 +327,7 @@ for(column_name in colnames(reduced_data)[4:(length(colnames(reduced_data))-colu
   file_name = paste(output_folder,'/',column_name,'_email.png',sep='')
   #print(file_name)
   try(ggsave(file_name, plot = last_plot()))
+ 
 }
+
+ save.image('/mnt/BLACKBURNLAB/QC/Reference/summary/QC.RData') 
