@@ -238,96 +238,96 @@ date_order = date[order(date$extracted_date),]
 
 
 
-library(ggplot2)
-
-dim(date_order)
-colnames(date_order)
-q <- qplot(extracted_date,Peptide.Sequences.Identified,data=date_order,geom="boxplot",colour = gradient,fill=column_volume)
-q + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-q <- qplot(month,Peptide.Sequences.Identified,data=date_order,geom="boxplot",colour = gradient,fill=column_volume)
-q + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-
-for(column_name in colnames(date_order)[4:(length(colnames(date_order))-columns_added)]){
-  #print(column_name)
-  #column_name = 'Peptide.Sequences.Identified'
-  cmd = paste('q <- qplot(extracted_date,',column_name,',data=date_order,geom=c("boxplot","point"),colour=column_volume)')
-  #print(cmd)
-  try(eval(parse(text=cmd)))
-  try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)))
-  file_name = paste(output_folder,'/',column_name,'.png',sep='')
-  #print(file_name)
-  try(ggsave(file_name, plot = last_plot()))
-}
-
-for(column_name in colnames(date_order)[4:(length(colnames(date_order))-columns_added)]){
-  #print(column_name)
-  #column_name = 'Peptide.Sequences.Identified'
-  cmd = paste('q <- qplot(date_collapse,',column_name,',data=date_order,geom=c("boxplot","point"),colour = column_volume)')
-  #print(cmd)
-  try(eval(parse(text=cmd)))
-  try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)))
-  file_name = paste(output_folder,'/',column_name,'_month.png',sep='')
-  #print(file_name)
-  try(ggsave(file_name, plot = last_plot()))
-}
-
-last = 100
-min_pep = 5000
-reduced_data = date_order[date_order$Peptide.Sequences.Identified > min_pep,]
-
-reduced_data = reduced_data[c((dim(reduced_data)[1]-last):dim(reduced_data)[1]),]
-dim(reduced_data)
-colnames(reduced_data)
-
-#dim(reduced_data)
-#q <- qplot(extracted_date,Peptide.Sequences.Identified,data=reduced_data,geom="boxplot",colour = column_volume)
-#q + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-
-for(column_name in colnames(reduced_data)[4:(length(colnames(reduced_data))-columns_added)]){
-  #print(column_name)
-  #column_name = 'Peptide.Sequences.Identified'
-  cmd = paste('q <- qplot(extracted_date,',column_name,',data=reduced_data,geom=c("boxplot","point"),colour = column_volume)')
-  #print(cmd)
-  try(eval(parse(text=cmd)))
-  try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)))
-
-  file_name = paste(output_folder,'/',column_name,'_last_',last,'.png',sep='')
-  #print(file_name)
-  try(ggsave(file_name, plot = last_plot()))
-}
-
-
-last = 200# no larger than 500
-min_pep = 5000
-reduced_data = date_order[date_order$Peptide.Sequences.Identified > min_pep,]
-
-reduced_data = reduced_data[c((dim(reduced_data)[1]-last):dim(reduced_data)[1]),]
-dim(reduced_data)
-colnames(reduced_data)
-for(column_name in colnames(reduced_data)[4:(length(colnames(reduced_data))-columns_added)]){
-  #print(column_name)
-  #column_name = 'Peptide.Sequences.Identified'
-  C1_max = C2_max = C1_min = C2_min = 0
-  C1_mean = mean(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C1 600ng'],na.rm=T)
-  C1_max = max(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C1 600ng'],na.rm=T)
-  C1_min = C1_max * 80 / 100
-  C2_max = max(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C2 600ng'],na.rm=T)
-  C2_mean = mean(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C2 600ng'],na.rm=T)
-  C2_min = C2_max * 80 / 100
-  cmd = paste('q <- qplot(date_collapse,',column_name,',data=reduced_data,geom=c("boxplot","point"),colour = column_volume)')
-  #print(cmd)
-  try(eval(parse(text=cmd)))
-  try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)+ geom_hline(yintercept=C1_mean, col = 'greenyellow') + geom_hline(yintercept=C2_mean, col = 'magenta') + geom_hline(yintercept=C1_max, col = 'green') + geom_hline(yintercept=C1_min, col = 'lightgreen') + geom_hline(yintercept=C2_max, col = 'red') + geom_hline(yintercept=C2_min, col = 'lightcoral')))
-  
-  file_name = paste(output_folder,'/',column_name,'_month_last_',last,'.png',sep='')
-  #print(file_name)
-  try(ggsave(file_name, plot = last_plot()))
-  file_name = paste(output_folder,'/',column_name,'_email.png',sep='')
-  #print(file_name)
-  try(ggsave(file_name, plot = last_plot()))
- 
-}
+# library(ggplot2)
+# 
+# dim(date_order)
+# colnames(date_order)
+# q <- qplot(extracted_date,Peptide.Sequences.Identified,data=date_order,geom="boxplot",colour = gradient,fill=column_volume)
+# q + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# q <- qplot(month,Peptide.Sequences.Identified,data=date_order,geom="boxplot",colour = gradient,fill=column_volume)
+# q + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# 
+# 
+# for(column_name in colnames(date_order)[4:(length(colnames(date_order))-columns_added)]){
+#   #print(column_name)
+#   #column_name = 'Peptide.Sequences.Identified'
+#   cmd = paste('q <- qplot(extracted_date,',column_name,',data=date_order,geom=c("boxplot","point"),colour=column_volume)')
+#   #print(cmd)
+#   try(eval(parse(text=cmd)))
+#   try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)))
+#   file_name = paste(output_folder,'/',column_name,'.png',sep='')
+#   #print(file_name)
+#   try(ggsave(file_name, plot = last_plot()))
+# }
+# 
+# for(column_name in colnames(date_order)[4:(length(colnames(date_order))-columns_added)]){
+#   #print(column_name)
+#   #column_name = 'Peptide.Sequences.Identified'
+#   cmd = paste('q <- qplot(date_collapse,',column_name,',data=date_order,geom=c("boxplot","point"),colour = column_volume)')
+#   #print(cmd)
+#   try(eval(parse(text=cmd)))
+#   try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)))
+#   file_name = paste(output_folder,'/',column_name,'_month.png',sep='')
+#   #print(file_name)
+#   try(ggsave(file_name, plot = last_plot()))
+# }
+# 
+# last = 100
+# min_pep = 5000
+# reduced_data = date_order[date_order$Peptide.Sequences.Identified > min_pep,]
+# 
+# reduced_data = reduced_data[c((dim(reduced_data)[1]-last):dim(reduced_data)[1]),]
+# dim(reduced_data)
+# colnames(reduced_data)
+# 
+# #dim(reduced_data)
+# #q <- qplot(extracted_date,Peptide.Sequences.Identified,data=reduced_data,geom="boxplot",colour = column_volume)
+# #q + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# 
+# 
+# for(column_name in colnames(reduced_data)[4:(length(colnames(reduced_data))-columns_added)]){
+#   #print(column_name)
+#   #column_name = 'Peptide.Sequences.Identified'
+#   cmd = paste('q <- qplot(extracted_date,',column_name,',data=reduced_data,geom=c("boxplot","point"),colour = column_volume)')
+#   #print(cmd)
+#   try(eval(parse(text=cmd)))
+#   try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)))
+# 
+#   file_name = paste(output_folder,'/',column_name,'_last_',last,'.png',sep='')
+#   #print(file_name)
+#   try(ggsave(file_name, plot = last_plot()))
+# }
+# 
+# 
+# last = 200# no larger than 500
+# min_pep = 5000
+# reduced_data = date_order[date_order$Peptide.Sequences.Identified > min_pep,]
+# 
+# reduced_data = reduced_data[c((dim(reduced_data)[1]-last):dim(reduced_data)[1]),]
+# dim(reduced_data)
+# colnames(reduced_data)
+# for(column_name in colnames(reduced_data)[4:(length(colnames(reduced_data))-columns_added)]){
+#   #print(column_name)
+#   #column_name = 'Peptide.Sequences.Identified'
+#   C1_max = C2_max = C1_min = C2_min = 0
+#   C1_mean = mean(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C1 600ng'],na.rm=T)
+#   C1_max = max(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C1 600ng'],na.rm=T)
+#   C1_min = C1_max * 80 / 100
+#   C2_max = max(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C2 600ng'],na.rm=T)
+#   C2_mean = mean(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C2 600ng'],na.rm=T)
+#   C2_min = C2_max * 80 / 100
+#   cmd = paste('q <- qplot(date_collapse,',column_name,',data=reduced_data,geom=c("boxplot","point"),colour = column_volume)')
+#   #print(cmd)
+#   try(eval(parse(text=cmd)))
+#   try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)+ geom_hline(yintercept=C1_mean, col = 'greenyellow') + geom_hline(yintercept=C2_mean, col = 'magenta') + geom_hline(yintercept=C1_max, col = 'green') + geom_hline(yintercept=C1_min, col = 'lightgreen') + geom_hline(yintercept=C2_max, col = 'red') + geom_hline(yintercept=C2_min, col = 'lightcoral')))
+#   
+#   file_name = paste(output_folder,'/',column_name,'_month_last_',last,'.png',sep='')
+#   #print(file_name)
+#   try(ggsave(file_name, plot = last_plot()))
+#   file_name = paste(output_folder,'/',column_name,'_email.png',sep='')
+#   #print(file_name)
+#   try(ggsave(file_name, plot = last_plot()))
+#  
+# }
 
  save.image('/mnt/BLACKBURNLAB/QC/Reference/summary/QC.RData') 
