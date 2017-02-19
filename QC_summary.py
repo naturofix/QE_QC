@@ -7,7 +7,7 @@ import fnmatch
 import time
 import datetime
 
-base_path = '/blackburn3/scripts/QC'
+base_path = '/mnt/BLACKBURNLAB/scripts/QC'
 try:
 	QC_path = sys.argv[1]
 except:
