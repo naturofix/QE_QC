@@ -61,6 +61,7 @@ if summary == True:
 		#print int(file_time)
         run_time = True
         if run_time == True:
+            print file_name
 			time_hit = 0
 			time_list.append(float(file_time))
 
