@@ -18,6 +18,12 @@ except:
 	last_time = 0
 	write = 'w'
 
+% trying to update the scirpt to only append files, but it is not working
+%so this is a work arround
+last = 0
+write = 'w'
+
+
 
 output_path = os.path.join(QC_path,'summary')
 os.system('mkdir %s' %output_path)
