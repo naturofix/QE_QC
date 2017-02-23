@@ -20,6 +20,7 @@ except:
 
 # trying to update the scirpt to only append files, but it is not working
 #so this is a work arround
+QC_path = '/mnt/BLACKBURNLAB/QC/Reference'
 last_time = 100
 write = 'w'
 
@@ -140,13 +141,13 @@ if summary == True:
 
 	write_file_name = '%s/summary_RAW.txt' %(output_path)
 	#print write_file_name
-	write_file = open(write_file_name,write)
+	write_file = open(write_file_name,'w')
 	write_file.writelines(raw_summary_list)
 	write_file.close()
 	print write_file_name
 	write_file_name = '%s/summary_Experiment.txt' %(output_path)
 	#print write_file_name
-	write_file = open(write_file_name,write)
+	write_file = open(write_file_name,'w')
 	write_file.writelines(experiment_summary_list)
 	write_file.close()
 
