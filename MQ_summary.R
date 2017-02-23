@@ -179,12 +179,15 @@ gradient_list
 
 date_list = sapply(raw$Raw.file, function(x) invisible(date_expr_function(x)))
 date_list
-date_object <- as.POSIXct(date_list)
-date_object
-month_list = sapply(date_object, function(x) strftime(x, '%Y-%m'))
-month_list
 
+#ERROR HERE
+#date_object <- as.POSIXct(date_list)
+#date_object
+#month_list = sapply(date_object, function(x) strftime(x, '%Y-%m'))
+#month_list
 
+#temp fix
+month_list = date_list
 
                     
 column_list = sapply(raw$Raw.file, function(x) invisible(column_expr_function(x)))
