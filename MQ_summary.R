@@ -216,6 +216,7 @@ columns_added = 7
 date = raw[!is.na(raw$extracted_date),]
 dim(date)
 
+print(date$extracted_date)
 date = date[as.Date(date$extracted_date, '%Y-%m-%d') <= as.Date(Sys.Date(), '%Y-%m-%d'),]
 dim(date)
 head(date)
