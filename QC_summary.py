@@ -58,8 +58,8 @@ if summary == True:
 		file_time = os.path.getmtime(file_name)
 		#print file_time
 		#print int(file_time)
-        #run_time = True
-        if file_time > last_time:
+        run_time = True
+        if run_time == True:
 			time_hit = 1
 			time_list.append(float(file_time))
 
