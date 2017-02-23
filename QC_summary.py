@@ -19,6 +19,12 @@ except:
 	write = 'w'
 
 
+rewrite = False
+rewrite = True
+if rewrite == True:
+	last_time = 0
+	write = 'w'
+
 output_path = os.path.join(QC_path,'summary')
 os.system('mkdir %s' %output_path)
 
@@ -59,6 +65,8 @@ if summary == True:
 		
 		if float(file_time) > float(last_time):
 			print file_time
+			word_date = datetime.datetime.fromtimestamp(int(file_time)).strftime('%Y %B %d : %H %M')
+			print word_date
 			print 'TRUE'
 		#run_time = True
 		#if run_time == True:
