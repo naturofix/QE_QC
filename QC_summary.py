@@ -20,7 +20,7 @@ except:
 
 # trying to update the scirpt to only append files, but it is not working
 #so this is a work arround
-last = 0
+last_time = 0
 write = 'w'
 
 
@@ -58,6 +58,7 @@ if summary == True:
 		file_time = os.path.getmtime(file_name)
 		#print file_time
 		#print int(file_time)
+        run_time = True
 		if file_time > last_time:
 			time_hit = 1
 			time_list.append(float(file_time))

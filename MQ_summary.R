@@ -179,16 +179,16 @@ gradient_list
 
 date_list = sapply(raw$Raw.file, function(x) invisible(date_expr_function(x)))
 date_list
-print(data_list)
+#print(data_list)
 
 #ERROR HERE
-#date_object <- as.POSIXct(date_list)
-#date_object
-#month_list = sapply(date_object, function(x) strftime(x, '%Y-%m'))
-#month_list
+date_object <- as.POSIXct(date_list)
+date_object
+month_list = sapply(date_object, function(x) strftime(x, '%Y-%m'))
+month_list
 
 #temp fix
-month_list = date_list
+#month_list = date_list
 
                     
 column_list = sapply(raw$Raw.file, function(x) invisible(column_expr_function(x)))
@@ -217,7 +217,7 @@ columns_added = 7
 date = raw[!is.na(raw$extracted_date),]
 dim(date)
 
-print(date$extracted_date)
+#print(date$extracted_date)
 date = date[as.Date(date$extracted_date, '%Y-%m-%d') <= as.Date(Sys.Date(), '%Y-%m-%d'),]
 dim(date)
 head(date)
