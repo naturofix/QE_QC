@@ -52,12 +52,13 @@ if summary == True:
 		file_time = os.path.getmtime(file_name)
 		#print file_time
 		#print int(file_time)
-		print file_time
+		
 		if float(file_time) > float(last_time):
+			print file_time
 			print 'TRUE'
-		run_time = True
-		if run_time == True:
-			time_hit = 0
+		#run_time = True
+		#if run_time == True:
+			time_hit = 1 # used to copy the most receent msScans file
 			time_list.append(float(file_time))
 
 			#print file_name
@@ -137,13 +138,13 @@ if summary == True:
 
 	write_file_name = '%s/summary_RAW.txt' %(output_path)
 	#print write_file_name
-	write_file = open(write_file_name,'w')
+	write_file = open(write_file_name,write)
 	write_file.writelines(raw_summary_list)
 	write_file.close()
 	print write_file_name
 	write_file_name = '%s/summary_Experiment.txt' %(output_path)
 	#print write_file_name
-	write_file = open(write_file_name,'w')
+	write_file = open(write_file_name,write)
 	write_file.writelines(experiment_summary_list)
 	write_file.close()
 
