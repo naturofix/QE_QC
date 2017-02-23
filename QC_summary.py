@@ -53,7 +53,7 @@ if summary == True:
 		#print file_time
 		#print int(file_time)
 		print file_time
-		if file_time > last_time:
+		if float(file_time) > float(last_time):
 			print 'TRUE'
 		run_time = True
 		if run_time == True:
