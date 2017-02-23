@@ -25,6 +25,17 @@ last_time = 100
 write = 'w'
 
 
+<<<<<<< .merge_file_tJOCJ2
+=======
+############### USE TO REWEITE THE summary_RAW file ###############
+
+
+rewrite = False
+#rewrite = True
+if rewrite == True:
+	last_time = 0
+	write = 'w'
+>>>>>>> .merge_file_apVYXA
 
 output_path = os.path.join(QC_path,'summary')
 os.system('mkdir %s' %output_path)
