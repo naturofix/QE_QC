@@ -20,7 +20,7 @@ except:
 
 # trying to update the scirpt to only append files, but it is not working
 #so this is a work arround
-last_time = 0
+last_time = 100
 write = 'w'
 
 
