@@ -19,8 +19,9 @@ except:
 	write = 'w'
 
 
+############### USE TO REWEITE THE summary_RAW file ###############
 rewrite = False
-rewrite = True
+#rewrite = True
 if rewrite == True:
 	last_time = 0
 	write = 'w'
