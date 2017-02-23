@@ -179,6 +179,7 @@ gradient_list
 
 date_list = sapply(raw$Raw.file, function(x) invisible(date_expr_function(x)))
 date_list
+print(data_list)
 
 #ERROR HERE
 #date_object <- as.POSIXct(date_list)
