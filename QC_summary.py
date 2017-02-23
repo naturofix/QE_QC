@@ -52,6 +52,9 @@ if summary == True:
 		file_time = os.path.getmtime(file_name)
 		#print file_time
 		#print int(file_time)
+		print file_time
+		if file_time > last_time:
+			print 'TRUE'
 		run_time = True
 		if run_time == True:
 			time_hit = 0
