@@ -48,7 +48,7 @@ if summary == True:
 	if write == 'w':
 		raw_summary_list = [heading_line]
 		experiment_summary_list =[heading_line]
-	if write == 'a'
+	if write == 'a':
 		raw_summary_list = []
 		experiment_summary_list =[]
 	#read_heading_line_list = read_line[0].split
