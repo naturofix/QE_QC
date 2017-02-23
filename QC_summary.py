@@ -45,8 +45,12 @@ if summary == True:
 	heading_line = '\t'.join(['Date']+heading_list)+'\n'
 
 	read_length_list = []
-	raw_summary_list = [heading_line]
-	experiment_summary_list =[heading_line]
+	if write == 'w':
+		raw_summary_list = [heading_line]
+		experiment_summary_list =[heading_line]
+	if write == 'a'
+		raw_summary_list = []
+		experiment_summary_list =[]
 	#read_heading_line_list = read_line[0].split
 	for file_name in matches:
 		file_time = os.path.getmtime(file_name)
