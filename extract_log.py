@@ -5,6 +5,9 @@ import sys
 
 base_path = sys.argv[1]
 base_path = os.path.join(base_path,'extract_log')
+last_time = sys.argv[2]
+
+write = 'a'
 
 info_list = []
 cal_list = []
@@ -38,8 +41,17 @@ file_list = os.listdir(log_path)
 file_list.sort()
 
 
+
 for file_name in file_list:
-	if 'Thermo Exactive' in file_name:
+	hit = 0
+	file_path = log_path+file_name
+	file_time = os.path.getmtime(file_path)
+	if file_time > last_time:
+		hit = 1
+	if write == 'w':
+		hit = 1
+
+	if 'Thermo Exactive' in file_name and hit = 1:
 		print file_name
 		read_file = open(log_path+file_name,'r')
 		read_list = read_file.readlines()
@@ -221,13 +233,13 @@ for diff in cal_list:
 
 write_file_name = os.path.join(base_path,'temp.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
 
 write_file_name = os.path.join(base_path,'cal.txt')
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(extract_list)
 write_file.close()
 
@@ -259,13 +271,13 @@ for diff in eval_list:
 
 write_file_name = os.path.join(base_path,'eval_temp.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
 
 write_file_name = os.path.join(base_path,'eval.txt')
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(extract_list)
 write_file.close()
 
@@ -295,13 +307,13 @@ for diff in tune_list:
 
 write_file_name = os.path.join(base_path,'tune_temp.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
 
 write_file_name = os.path.join(base_path,'tune.txt')
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(extract_list)
 write_file.close()
 
@@ -317,7 +329,7 @@ for dic in cal_error_list:
 		write_list.append(write_line)
 print '%s : %s ' %(write_file_name,len(write_list))
 write_file_name = os.path.join(base_path,'cal_error.txt')
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()	
 
@@ -333,7 +345,7 @@ for dic in cal_warning_list:
 
 write_file_name = os.path.join(base_path,'cal_warning.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
@@ -350,7 +362,7 @@ for dic in cal_end_list:
 
 write_file_name = os.path.join(base_path,'cal_end.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
@@ -365,7 +377,7 @@ for dic in eval_error_list:
 
 write_file_name = os.path.join(base_path,'eval_error.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()	
 
@@ -381,7 +393,7 @@ for dic in eval_warning_list:
 
 write_file_name = os.path.join(base_path,'eval_warning.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
@@ -396,7 +408,7 @@ for dic in eval_end_list:
 
 write_file_name = os.path.join(base_path,'eval_end.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
@@ -411,7 +423,7 @@ for dic in tune_error_list:
 
 write_file_name = os.path.join(base_path,'tune_error.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()	
 
@@ -427,7 +439,7 @@ for dic in tune_warning_list:
 
 write_file_name = os.path.join(base_path,'tune_warning.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
@@ -442,7 +454,7 @@ for dic in tune_end_list:
 
 write_file_name = os.path.join(base_path,'tune_end.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 
@@ -459,7 +471,7 @@ for dic in error_list:
 
 write_file_name = os.path.join(base_path,'error.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()	
 
@@ -475,7 +487,7 @@ for dic in warning_list:
 
 write_file_name = os.path.join(base_path,'warning.txt')
 print '%s : %s ' %(write_file_name,len(write_list))
-write_file = open(write_file_name,'w')
+write_file = open(write_file_name,write)
 write_file.writelines(write_list)
 write_file.close()
 

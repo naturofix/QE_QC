@@ -231,6 +231,42 @@ collapse_date_list = sapply(date_list, function(x) date_collapse_function(x,last
 date$date_collapse = collapse_date_list
 
 date_order = date[order(date$extracted_date),]
+
+library(ggplot2)
+last = 400
+reduced_data = date_order[c((dim(date_order)[1]-last):dim(date_order)[1]),]
+dim(reduced_data)
+column_name = 'Peptide.Sequences.Identified'
+  #print(column_name)
+  #column_name = 'Peptide.Sequences.Identified'
+  C1_max = C2_max = C1_min = C2_min = 0
+  C1_mean = mean(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C1 600ng'],na.rm=T)
+  C1_max = max(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C1 600ng'],na.rm=T)
+  C1_min = C1_max * 80 / 100
+  C2_max = max(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C2 600ng'],na.rm=T)
+  C2_mean = mean(reduced_data[,column_name][reduced_data[,'column_volume'] == 'C2 600ng'],na.rm=T)
+  C2_min = C2_max * 80 / 100
+  cmd = paste('q <- qplot(date_collapse,',column_name,',data=reduced_data,geom=c("boxplot","point"),colour = column_volume)')
+  #print(cmd)
+  try(eval(parse(text=cmd)))
+  try(print(q + theme(axis.text.x = element_text(angle = 90, hjust = 1))+ ggtitle(column_name)+ geom_hline(yintercept=C1_mean, col = 'greenyellow') + geom_hline(yintercept=C2_mean, col = 'magenta') + geom_hline(yintercept=C1_max, col = 'green') + geom_hline(yintercept=C1_min, col = 'lightgreen') + geom_hline(yintercept=C2_max, col = 'red') + geom_hline(yintercept=C2_min, col = 'lightcoral')))
+
+  file_name = paste(output_folder,'/',column_name,'_month_last_',last,'.png',sep='')
+  #print(file_name)
+  try(ggsave(file_name, plot = last_plot()))
+  file_name = paste(output_folder,'/',column_name,'_email.png',sep='')
+  #print(file_name)
+  try(ggsave(file_name, plot = last_plot()))
+
+#  q = ggplot(date_order[c(length(date_order$date_collapse)-400:length(date_order$date_collapse)),],
+#        aes(date_collapse, Peptide.Sequences.Identified)) + 
+#   geom_boxplot(aes(colour = column_volume)) +
+#   theme(text = element_text(size=15),axis.text.x = element_text(angle = 90, hjust = 1)) +
+#   labs(x = NULL, y = NULL)
+# print(q)
+# file_name = paste(output_folder,'/Peptides_Identified.png',sep='')
+# print(file_name)
+# try(ggsave(file_name, plot = last_plot()))
 #plot(date_order$extracted_date,date_order$Peptide.Sequences.Identified,cex = 0.2,pch = 19,names.arg = date_order$extracted_date)
 #plot(date_order$extracted_date,date_order$MS.MS,cex = 0.2,pch = 19,xlim = c(1000,15000))
 #plot(date_order$Peptide.Sequences.Identifiedcex = 0.2,pch = 19)

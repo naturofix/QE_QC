@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly=TRUE)
-
+plot_run = FALSE
 
 library(ggplot2)
 getwd()
@@ -64,8 +64,8 @@ for(test_type in test_type_list){
       #print(cal$date_summary)
       #error
       
-      run = TRUE
-      if(run == TRUE){
+      
+      if(plot_run == TRUE){
       print(colnames(cal))
       last_num = length(colnames(cal))-2
       print(last_num)
@@ -101,3 +101,5 @@ for(test_type in test_type_list){
   }
   print(error_list)
 }
+
+save.image(paste(base_path,'cal.RData',sep='/'))
