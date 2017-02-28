@@ -18,9 +18,12 @@ except:
 	last_time = 0
 	write = 'w'
 
+msScans_total = True
+msScans_total = False
+scan_len = 36
 
 rewrite = False
-rewrite = True
+#rewrite = True
 if rewrite == True:
 	last_time = 0
 	write = 'w'
@@ -58,7 +61,9 @@ if summary == True:
 		raw_summary_list = []
 		experiment_summary_list =[]
 	#read_heading_line_list = read_line[0].split
+	n = 0
 	for file_name in matches:
+		n += 1
 		file_time = os.path.getmtime(file_name)
 		#print file_time
 		#print int(file_time)
@@ -145,6 +150,53 @@ if summary == True:
 							raw_summary_list.append(write_line)
 					else:
 						print 'blank line'
+			scan_hit = 0
+			if msScans_total == True:
+				scan_file = open(os.path.join(folder_name,'msScans.txt'),'r')
+				scan_list = scan_file.readlines()
+				scan_file.close()
+				if len(scan_list) != 0:
+					scan_heading_list = scan_list[0].replace('\r\n','').split('\t')
+					#print scan_heading_list
+					#raw_input()
+					try:
+
+						file_index = scan_heading_list.index('Raw file')
+						tic_index = scan_heading_list.index('Total ion current')
+						rt_index = scan_heading_list.index('Retention time')
+						scan_hit = 1
+					except:
+						scan_hit = 1
+					#raw_input(len(scan_heading_list))
+				if n == 1:
+
+					#raw_input(scan_list)
+					#raw_input(scan_list[0])
+					#raw_input(len(scan_list))
+					if len(scan_list) != 0:
+
+						#raw_input(scan_list[0])
+						if write == 'w':
+							#scan_heading_list = scan_list[0].replace('\r\n','').split('\t')
+							#raw_input(heading_list)
+							#raw_input(scan_heading_list)
+							scan_entry_list = ['Raw file','Total ion current','Retention time']
+							scan_write_list = ['\t'.join(scan_entry_list)+'\r\n']
+						else:
+							scan_write_list = []
+					else:
+						n = 0
+				if n != 0:
+					if scan_hit == 1:
+						for scan_line in scan_list[1:]:
+							scan_line_list = scan_line.split('\t')
+
+
+
+							scan_write_list.append('\t'.join([scan_line_list[file_index],scan_line_list[tic_index],scan_line_list[rt_index]]))
+						print 'scan hit'
+					else:
+						print len(scan_heading_list)
 
 
 
@@ -161,6 +213,13 @@ if summary == True:
 	write_file.close()
 
 	print write_file_name
+	if msScans_total == True:
+		write_file_name = '%s/msScans_all.txt' %(output_path)
+		#print write_file_name
+		write_file = open(write_file_name,write)
+		write_file.writelines(scan_write_list)
+		write_file.close()
+		print write_file_name
 #raw_input()
 print time_list
 if time_hit == 1:

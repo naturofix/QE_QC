@@ -4,9 +4,9 @@ args = commandArgs(trailingOnly=TRUE)
 
 output_folder = '/home/sgarnett/Downloads/'
 #output_folder = '/Users/sgarnett/Downloads/summary/'
-#output_folder = '/mnt/BLACKBURNLAB/QC/Reference/summary/'
+output_folder = '/mnt/BLACKBURNLAB/QC/Reference/summary/'
 
-output_folder = args[1]
+#output_folder = args[1]
 
 #system(paste('mkdir',output_folder))
 raw = read.table(paste(output_folder,'summary_RAW.txt',sep='/'),sep ='\t',header = TRUE, stringsAsFactors = TRUE)
@@ -365,5 +365,26 @@ column_name = 'Peptide.Sequences.Identified'
 #   try(ggsave(file_name, plot = last_plot()))
 #  
 # }
+#save.image('/mnt/BLACKBURNLAB/QC/Reference/summary/QC.RData')
 
- save.image('/mnt/BLACKBURNLAB/QC/Reference/summary/QC.RData') 
+  
+scans = read.table(paste(output_folder,'msScans.txt',sep='/'),sep ='\t',header = TRUE, stringsAsFactors = TRUE)
+colnames(scans)
+dim(scans)
+
+ideal_scans = read.table(paste(output_folder,'msScans_ideal.txt',sep='/'),sep ='\t',header = TRUE, stringsAsFactors = TRUE)
+colnames(ideal_scans)
+dim(ideal_scans)
+
+ggplot(data = ideal_scans, aes(x=Retention.time,y=Total.ion.current,colour=Raw.file)) +
+  geom_line(size = 0.05, alpha = 0.5) +
+  ylim(0,5e9) +
+  geom_line(data = scans,
+            aes(x=Retention.time,y=Total.ion.current,colour=Raw.file),size = 0.1)
+
+file_name = paste(output_folder,'/RAW_email.png',sep='')
+#print(file_name)
+try(ggsave(file_name, plot = last_plot()))
+
+save.image('/mnt/BLACKBURNLAB/QC/Reference/summary/QC.RData')
+#save.image('/mnt/BLACKBURNLAB/QC/Reference/summary/msScans.RData') 
