@@ -51,7 +51,7 @@ for file_name in file_list:
 	if write == 'w':
 		hit = 1
 
-	if 'Thermo Exactive' in file_name and hit = 1:
+	if 'Thermo Exactive' in file_name and hit == 1:
 		print file_name
 		read_file = open(log_path+file_name,'r')
 		read_list = read_file.readlines()
