@@ -56,8 +56,8 @@ evidence_table = 0 #drop table
 scan_len = 36
 
 
-rewrite = True
-#rewrite = False
+#rewrite = True
+rewrite = False
 
 if rewrite == True:
 	last_time = 0
@@ -104,7 +104,7 @@ if summary == True:
 		cur.execute(cmd)
 		sql_header_line = 'Create Table if not exists %s (%s)' %(table_name,', '.join(header_list))
 		print sql_header_line
-		raw_input()
+		#raw_input()
 		cur.execute(sql_header_line)
 
 		table_name = 'summary_Experiment'
@@ -349,7 +349,7 @@ if summary == True:
 							cur.execute(cmd)
 							sql_header_line = 'Create Table if not exists %s (%s)' %(table_name,', '.join(header_list))
 							print sql_header_line
-							raw_input()
+							#raw_input()
 							cur.execute(sql_header_line)
 							scan_table = 1
 						else:
@@ -452,7 +452,7 @@ if summary == True:
 							cur.execute(cmd)
 							sql_header_line = 'Create Table if not exists %s (%s)' %(table_name,', '.join(header_list))
 							print sql_header_line
-							raw_input()
+							#raw_input()
 							cur.execute(sql_header_line)
 							evidence_table = 1
 						else:
@@ -613,7 +613,9 @@ if msScans_top_file_output == True:
 if commit_db == True:
 	con.commit()
 	print 'databases committed'
-run_r = False
+run_r = True
 if run_r == True:
-	os.system('Rscript %s/MQ_summary.R %s' %(base_path,output_path))
+	os.system('Rscript %s/QC_db_meta.R %s' %(base_path,output_path))
+	os.system('Rscript %s/QC_db_querys.R %s' %(base_path,output_path))
+
 

@@ -32,14 +32,14 @@ for(col_entry in num_list){
 
 summary$Date = as.Date(summary$Date, '%Y-%m-%d')
 
-recent = summary$Raw_file[as.Date(summary$Date, '%Y-%m-%d') > as.Date('2017-05-15', '%Y-%m-%d') &  as.Date(summary$Date, '%Y-%m-%d') < as.Date('2017-06-01', '%Y-%m-%d')]
+recent = summary$Raw_file[as.Date(summary$Date, '%Y-%m-%d') > as.Date('2017-05-15', '%Y-%m-%d') &  as.Date(summary$Date, '%Y-%m-%d') < as.Date('2017-09-01', '%Y-%m-%d')]
 recent # list of the most recent raw files
 length(recent)
 
 cmd = paste("select * from evidence WHERE Raw_file in ('",paste(recent,collapse = "' ,'"),"');",sep='')
 
 best_ids = summary$Raw_file[summary$Peptide_Sequences > 10000 & summary$Gradient == "60"  & summary$Loading == "600ng" & summary$Column == 'C1']
-best_ids = summary$Raw_file[summary$Peptide_Sequences > 13000 & summary$Peptide_Sequences < 14000 summary$Gradient == "70" & summary$Loading == "1000ng"]
+best_ids = summary$Raw_file[summary$Peptide_Sequences > 12000 & summary$Peptide_Sequences < 14000 & summary$Gradient == "70" & summary$Loading == "1000ng"]
 
 best_ids # list of the best raw file 60min gradient, 600ng on C1
 
